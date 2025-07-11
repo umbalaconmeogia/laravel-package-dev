@@ -99,6 +99,89 @@
         .btn-secondary:hover {
             background-color: #4a5568;
         }
+        
+        .language-switcher-container {
+            margin-left: 1rem;
+            position: relative;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-toggle {
+            background-color: #4a5568;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s;
+        }
+        
+        .dropdown-toggle:hover {
+            background-color: #2d3748;
+        }
+        
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+        
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s;
+            z-index: 1000;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            color: #2d3748;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f7fafc;
+        }
+        
+        .dropdown-item.active {
+            background-color: #4299e1;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -110,6 +193,26 @@
                 <li><a href="{{ route('package-tests') }}" class="{{ request()->routeIs('package-tests') ? 'active' : '' }}">Package Tests</a></li>
                 <li><a href="{{ route('documentation') }}" class="{{ request()->routeIs('documentation') ? 'active' : '' }}">Documentation</a></li>
                 <li><a href="{{ route('settings') }}" class="{{ request()->routeIs('settings') ? 'active' : '' }}">Settings</a></li>
+                <li class="language-switcher-container">
+                    <div class="dropdown">
+                        <button class="dropdown-toggle">
+                            {{ config('language-switcher.supported_languages')[app()->getLocale()] ?? 'Language' }}
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @foreach(config('language-switcher.supported_languages') as $code => $name)
+                                <li>
+                                    <form method="POST" action="{{ route('language.switch', $code) }}" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item {{ app()->getLocale() === $code ? 'active' : '' }}">
+                                            {{ $name }}
+                                        </button>
+                                    </form>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>

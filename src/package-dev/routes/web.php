@@ -17,3 +17,6 @@ Route::get('/documentation', function () {
 Route::get('/settings', function () {
     return view('settings');
 })->name('settings');
+
+// Language switcher routes
+Route::languageSwitcher();
