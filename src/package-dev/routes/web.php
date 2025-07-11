@@ -20,3 +20,15 @@ Route::get('/settings', function () {
 
 // Language switcher routes
 Route::languageSwitcher();
+
+// Language switcher API routes
+Route::languageSwitcherApi();
+
+// Test API endpoints
+Route::get('/test-api', function () {
+    return response()->json([
+        'message' => 'API is working',
+        'current_language' => app()->getLocale(),
+        'supported_languages' => config('language-switcher.supported_languages'),
+    ]);
+});

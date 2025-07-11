@@ -22,5 +22,6 @@ git push origin v1.0.0
 ### Test the package
 
 ```shell
-vendor/bin/phpunit
+composer install
+php vendor/bin/phpunit
 ```
