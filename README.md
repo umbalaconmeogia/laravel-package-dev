@@ -11,3 +11,10 @@ My application to test my Laravel packages
 * Add the package into laravel-package-dev application's composer.json.
 * Test the package.
 * Publish the package.
+
+### To push a page to packagis
+
+```shell
+git tag v1.0.0
+git push origin v1.0.0
+```

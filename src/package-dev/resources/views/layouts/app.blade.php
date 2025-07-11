@@ -185,7 +185,7 @@
                 <li><a href="{{ route('documentation') }}" class="{{ request()->routeIs('documentation') ? 'active' : '' }}">{{ __('menu.documentation') }}</a></li>
                 <li><a href="{{ route('settings') }}" class="{{ request()->routeIs('settings') ? 'active' : '' }}">{{ __('menu.settings') }}</a></li>
                 <li class="language-switcher-container">
-                    @include('language-switcher::language-switcher')
+                    <x-language-switcher::language-switcher />
                 </li>
             </ul>
         </div>
