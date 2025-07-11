@@ -18,3 +18,9 @@ My application to test my Laravel packages
 git tag v1.0.0
 git push origin v1.0.0
 ```
+
+### Test the package
+
+```shell
+vendor/bin/phpunit
+```
