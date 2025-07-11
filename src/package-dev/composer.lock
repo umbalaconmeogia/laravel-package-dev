@@ -5566,7 +5566,7 @@
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../../../packages/laravel-language-switcher",
+                "url": "../../../packages/laravel-language-switcher.backup",
                 "reference": "21aaea7ca51a5c2b1d4c6058b9bdf1b77755fc98"
             },
             "require": {

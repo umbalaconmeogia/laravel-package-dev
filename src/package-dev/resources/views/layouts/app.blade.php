@@ -100,118 +100,92 @@
             background-color: #4a5568;
         }
         
+        /* Language Switcher Styles */
         .language-switcher-container {
-            margin-left: 1rem;
             position: relative;
         }
         
-        .dropdown {
-            position: relative;
+        .language-switcher {
             display: inline-block;
+            position: relative;
         }
         
-        .dropdown-toggle {
-            background-color: #4a5568;
+        .language-switcher-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            border: none;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.9rem;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: background-color 0.2s;
         }
         
-        .dropdown-toggle:hover {
-            background-color: #2d3748;
+        .language-switcher-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
-        .dropdown-arrow {
-            font-size: 0.7rem;
-            transition: transform 0.2s;
-        }
-        
-        .dropdown:hover .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-        
-        .dropdown-menu {
+        .language-switcher-dropdown {
             position: absolute;
             top: 100%;
             right: 0;
-            background-color: white;
+            background: white;
             border: 1px solid #e2e8f0;
             border-radius: 4px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            list-style: none;
-            padding: 0.5rem 0;
-            margin: 0;
             min-width: 150px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.2s;
             z-index: 1000;
+            display: none;
         }
         
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        .language-switcher:hover .language-switcher-dropdown {
+            display: block;
         }
         
-        .dropdown-item {
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
+        .language-switcher-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
             color: #2d3748;
-            font-size: 0.9rem;
-            transition: background-color 0.2s;
+            text-decoration: none;
+            border-bottom: 1px solid #f7fafc;
+            transition: background-color 0.3s;
         }
         
-        .dropdown-item:hover {
+        .language-switcher-dropdown a:last-child {
+            border-bottom: none;
+        }
+        
+        .language-switcher-dropdown a:hover {
             background-color: #f7fafc;
+            color: #2d3748;
         }
         
-        .dropdown-item.active {
+        .language-switcher-dropdown a.active {
             background-color: #4299e1;
             color: white;
         }
+        
+        .language-switcher-dropdown a.active:hover {
+            background-color: #3182ce;
+        }
+        
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="{{ route('home') }}" class="nav-brand">Laravel Package Dev</a>
+            <a href="{{ route('home') }}" class="nav-brand">{{ __('menu.app_name') }}</a>
             <ul class="nav-menu">
-                <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-                <li><a href="{{ route('package-tests') }}" class="{{ request()->routeIs('package-tests') ? 'active' : '' }}">Package Tests</a></li>
-                <li><a href="{{ route('documentation') }}" class="{{ request()->routeIs('documentation') ? 'active' : '' }}">Documentation</a></li>
-                <li><a href="{{ route('settings') }}" class="{{ request()->routeIs('settings') ? 'active' : '' }}">Settings</a></li>
+                <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">{{ __('menu.home') }}</a></li>
+                <li><a href="{{ route('package-tests') }}" class="{{ request()->routeIs('package-tests') ? 'active' : '' }}">{{ __('menu.package_tests') }}</a></li>
+                <li><a href="{{ route('documentation') }}" class="{{ request()->routeIs('documentation') ? 'active' : '' }}">{{ __('menu.documentation') }}</a></li>
+                <li><a href="{{ route('settings') }}" class="{{ request()->routeIs('settings') ? 'active' : '' }}">{{ __('menu.settings') }}</a></li>
                 <li class="language-switcher-container">
-                    <div class="dropdown">
-                        <button class="dropdown-toggle">
-                            {{ config('language-switcher.supported_languages')[app()->getLocale()] ?? 'Language' }}
-                            <span class="dropdown-arrow">▼</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            @foreach(config('language-switcher.supported_languages') as $code => $name)
-                                <li>
-                                    <form method="POST" action="{{ route('language.switch', $code) }}" style="display: inline;">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item {{ app()->getLocale() === $code ? 'active' : '' }}">
-                                            {{ $name }}
-                                        </button>
-                                    </form>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @include('language-switcher::language-switcher')
                 </li>
             </ul>
         </div>
