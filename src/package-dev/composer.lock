@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88970a0117c062eed55fa8728fc43833",
+    "content-hash": "a8680930f2a1664b7501bc2ae6ba29af",
     "packages": [
         {
             "name": "brick/math",
@@ -5562,6 +5562,61 @@
             "time": "2024-12-21T16:25:41+00:00"
         },
         {
+            "name": "umbalaconmeogia/laravel-language-switcher",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../../../packages/laravel-language-switcher",
+                "reference": "21aaea7ca51a5c2b1d4c6058b9bdf1b77755fc98"
+            },
+            "require": {
+                "laravel/framework": ">=11.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Umbalaconmeogia\\LanguageSwitcher\\LanguageSwitcherServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Umbalaconmeogia\\LanguageSwitcher\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Umbalaconmeogia\\LanguageSwitcher\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tran Trung Thanh",
+                    "email": "umbalaconmeogia@gmail.com"
+                }
+            ],
+            "description": "A CSS framework independent Laravel package for implementing multilingual functionality",
+            "keywords": [
+                "i18n",
+                "language",
+                "language-switcher",
+                "laravel",
+                "localization",
+                "multilingual"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.2",
             "source": {
@@ -8094,7 +8149,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "umbalaconmeogia/laravel-language-switcher": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
